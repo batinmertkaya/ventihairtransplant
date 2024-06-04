@@ -1,0 +1,37 @@
+// Font Family
+$font-1: 'Raleway', sans-serif;
+$font-2: 'Open Sans', sans-serif;
+
+// Colors ---------------
+$white: #fff;
+$black: #222;
+$gray: #F3FDFF;
+
+
+// Theme Color
+$theme-color: #00ADB5;
+
+$border-color: #8C96A7;
+
+//Body Color
+$body-color: #8C96A7;
+
+
+// Heading Color
+$heading-color: #393E46;
+
+// Gradient-colors
+$gradient-color-1: linear-gradient(to right, #ffffff, rgba($white, .95), rgba($white, .64), rgba($white, .02), rgba($white, .0));
+$gradient-color-2: linear-gradient(to right , $theme-color, rgba($theme-color, .8), rgba($white, .2), rgba($white, .1), rgba($white, .0));
+
+
+
+// Responsive Variables
+$desktop: 'only screen and (min-width: 1400px)';
+$laptop: 'only screen and (min-width: 1200px) and (max-width: 1399px)';
+$lg : 'only screen and (min-width: 992px) and (max-width: 1199px)';
+$md:'only screen and (min-width: 768px) and (max-width: 991px)';
+$xs:'(max-width: 767px)';
+$sm: 'only screen and (min-width: 480px) and (max-width: 767px)';
+
+

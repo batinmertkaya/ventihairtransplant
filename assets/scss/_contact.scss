@@ -1,0 +1,82 @@
+/*===========================
+    Contact css 
+===========================*/
+.contact-section {
+    position: relative;
+
+    .shape {
+        top: 250px;
+        left: -120px;
+    }
+    .contact-img {
+        position: absolute;
+        left: 0;
+        width: 50%;
+        bottom: 130px;
+
+        @media #{$laptop} {
+            bottom: 165px;
+        }
+        @media #{$lg} {
+            bottom: 180px;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+    .contact-wrapper {
+        @media #{$md} {
+            text-align: center;
+        }
+        h2 , p {
+            @media #{$md} {
+                padding: 0 60px;
+            }
+        } 
+        @media #{$xs} {
+            text-align: center;
+        }
+    }
+
+    .contact-form {
+        .selectr-selected,
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid $border-color;
+            border-radius: 10px;
+            padding: 16px 25px;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 25px;
+            color: #8C96A7;
+            @include transition(.3s);
+
+            &:focus {
+                border-color: $theme-color;
+                outline: none;
+            }
+            
+        }
+
+        .selectr-selected {
+            height: auto;
+
+            &::after {
+                height: 10px;
+                margin-top: -7px;
+                right: 25px;
+                width: 10px;
+            }
+
+            .list {
+                width: 100%;
+            }
+        }
+
+        .btn {
+            padding: 16px 38px;
+        }
+    }
+}

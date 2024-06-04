@@ -1,0 +1,534 @@
+
+
+/*===========================
+    COMMON css 
+===========================*/
+
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Raleway:300,400,500,600,600i,700,900&display=swap');
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: $font-2;
+    font-weight: normal;
+    font-style: normal;
+    color: $body-color;
+    overflow-x: hidden;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    @include box-sizing (border-box);
+}
+
+img {
+	max-width: 100%;
+}
+.navbar-toggler:focus,
+*:focus,
+a:focus,
+input:focus,
+textarea:focus,
+button:focus,
+.btn:focus,
+.btn.focus {
+	text-decoration: none;
+    outline: none;
+    @include box-shadow(none);
+}
+a:hover {
+    @include transition(.3s);
+    color: $theme-color;
+}
+a:focus,
+a:hover{
+	text-decoration: none;
+}
+
+i,
+span,
+a{
+    display: inline-block;
+    text-decoration: none;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 600;
+    color: $heading-color;
+    font-family: $font-1;
+	margin: 0px;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+    color: inherit;
+}
+
+h1 {
+	font-size: 48px;
+}
+h2 {
+	font-size: 45px;
+}
+h3 {
+	font-size: 28px;
+}
+h4 {
+	font-size: 25px;
+}
+h5 {
+	font-size: 20px;
+}
+h6 {
+	font-size: 16px;
+}
+
+ul,ol {
+	margin: 0px;
+	padding: 0px;
+    list-style-type: none;
+}
+
+p {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 28px;
+	color: $body-color;
+	margin: 0px;
+}
+
+.img-bg {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.theme-bg {
+    background-color: $theme-color;
+}
+
+.container {
+    @media #{$sm} {
+        width: 450px;
+    }
+}
+
+.read-more {
+    font-size: 18px;
+    font-weight: 500;
+    color: $theme-color;
+    font-family: $font-1;
+
+    i {
+        margin-left: 15px;
+        @include transition(.3s);
+    }
+
+    &:hover {
+        i {
+            margin-left: 30px;
+        }
+    }
+}
+.error {
+    color: crimson;
+}
+.success {
+    color: $theme-color;
+}
+.shape {
+    position: absolute;
+}
+// others common css here
+
+
+// tiny slider css
+.tns-nav {
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    z-index: 99;
+}
+.tns-nav button {
+    cursor: pointer;
+    text-indent: -999999px;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    background: rgba($theme-color, .31);
+    margin: 0 8px;
+    @include transition(.3s);
+
+    &.tns-nav-active {
+        background: rgba($theme-color, 1);
+        transform: scale(1.2);
+    }
+}
+
+
+/*===== All Button Style =====*/
+
+.theme-btn {
+	display: inline-block;
+	font-weight: 600;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	@include user-select(none);
+	padding: 18px 40px;
+	font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    color: $white;
+    cursor: pointer;
+    z-index: 5;
+    @include transition(0.3s);
+    background-color: $theme-color;
+    
+    &:hover{
+        background-color: rgba($theme-color, 0.7);
+        color: $white;
+        border-color: transparent;
+        @include box-shadow(0 10px 25px rgba($theme-color, .3));
+    }
+
+}
+
+// scroll-top
+.scroll-top {
+    width: 45px;
+    height: 45px;
+    background: $theme-color;;
+    text-align: center;
+    line-height: 45px;
+    font-size: 20px;
+    color: $white;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9;
+    cursor: pointer;
+    @include transition(.3s);
+
+    &:hover {
+        color: $white;
+        background: rgba($theme-color, .7);
+    }
+}
+
+
+@keyframes animation1 {
+    0% {
+        @include transform(scale(1));
+    }
+
+    50% {
+        @include transform(scale(0));
+    }
+
+    100% {
+        @include transform(scale(1));
+    }
+}
+@-webkit-keyframes animation1 {
+    0% {
+        @include transform(scale(1));
+    }
+
+    50% {
+        @include transform(scale(0));
+    }
+
+    100% {
+        @include transform(scale(1));
+    }
+}
+
+
+
+/*===== All Section Title Style =====*/
+.section-title{
+    & span {
+        font-family: $font-1;
+        font-size: 25px;
+        font-weight: 600;
+        display: block;
+        color: $theme-color;
+        margin-bottom: 15px;
+    }
+}
+
+
+/*===== All Preloader Style =====*/
+
+.preloader{
+    /* Body Overlay */
+    position: fixed;
+    top: 0;
+    left: 0;
+    display:  table;
+    height: 100%;
+    width:  100%;
+    /* Change Background Color */
+    background: $white;
+    z-index: 99999;
+    
+    & .loader{
+        display: table-cell;
+        vertical-align:  middle;
+        text-align: center;
+        
+        & .ytp-spinner {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 64px;
+            margin-left: -32px;
+            z-index: 18;
+            pointer-events: none;
+            
+            & .ytp-spinner-container {
+                pointer-events: none;
+                position: absolute;
+                width: 100%;
+                padding-bottom: 100%;
+                top: 50%;
+                left: 50%;
+                margin-top: -50%;
+                margin-left: -50%;
+                @include animation(ytp-spinner-linspin 1568.23529647ms linear infinite);
+                
+                & .ytp-spinner-rotator {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    @include animation(ytp-spinner-easespin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both);
+                    
+                    & .ytp-spinner-left {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        overflow: hidden;
+                        right: 50%;
+                    }
+                    
+                    & .ytp-spinner-right {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        overflow: hidden;
+                        left: 50%;
+                    }
+                }
+            }
+        }
+        
+        & .ytp-spinner-circle {
+            box-sizing: border-box;
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            border-style: solid;
+            /* Spinner Color */
+            border-color: $theme-color $theme-color $border-color;
+            border-radius: 50%;
+            border-width: 6px;
+        }
+        
+        & .ytp-spinner-left {
+            & .ytp-spinner-circle {
+                left: 0;
+                right: -100%;
+                border-right-color: $border-color;
+                @include animation( ytp-spinner-left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both);
+            }
+        }
+        
+        & .ytp-spinner-right {
+            & .ytp-spinner-circle {
+                left: -100%;
+                right: 0;
+                border-left-color: $border-color;
+                @include animation(ytp-right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both);
+            }
+        }
+    }
+}
+
+/* Preloader Animations */
+
+@-webkit-keyframes ytp-spinner-linspin {
+    to {
+        @include transform(rotate(360deg));
+    }
+}
+
+@keyframes ytp-spinner-linspin {
+    to {
+        @include transform(rotate(360deg));
+    }
+}
+
+@-webkit-keyframes ytp-spinner-easespin {
+    12.5% {
+        @include transform(rotate(135deg));
+    }
+    25% {
+        @include transform(rotate(270deg));
+    }
+    37.5% {
+        @include transform(rotate(405deg));
+    }
+    50% {
+        @include transform(rotate(540deg));
+    }
+    62.5% {
+        @include transform(rotate(675deg));
+    }
+    75% {
+        @include transform(rotate(810deg));
+    }
+    87.5% {
+        @include transform(rotate(945deg));
+    }
+    to {
+        @include transform(rotate(1080deg));
+    }
+}
+
+@keyframes ytp-spinner-easespin {
+    12.5% {
+        @include transform(rotate(135deg));
+    }
+    25% {
+        @include transform(rotate(270deg));
+    }
+    37.5% {
+        @include transform(rotate(405deg));
+    }
+    50% {
+        @include transform(rotate(540deg));
+    }
+    62.5% {
+        @include transform(rotate(675deg));
+    }
+    75% {
+        @include transform(rotate(810deg));
+    }
+    87.5% {
+        @include transform(rotate(945deg));
+    }
+    to {
+        @include transform(rotate(1080deg));
+    }
+}
+
+@-webkit-keyframes ytp-spinner-left-spin {
+    0% {
+        @include transform(rotate(130deg));
+    }
+    50% {
+        @include transform(rotate(-5deg));
+    }
+    to {
+        @include transform(rotate(130deg));
+    }
+}
+
+@keyframes ytp-spinner-left-spin {
+    0% {
+        @include transform(rotate(130deg));
+    }
+    50% {
+        @include transform(rotate(-5deg));
+    }
+    to {
+        @include transform(rotate(130deg));
+    }
+}
+
+@-webkit-keyframes ytp-right-spin {
+    0% {
+        @include transform(rotate(-130deg));
+    }
+    50% {
+        @include transform(rotate(5deg));
+    }
+    to {
+        @include transform(rotate(-130deg));
+    }
+}
+
+@keyframes ytp-right-spin {
+    0% {
+        @include transform(rotate(-130deg));
+    }
+    50% {
+        @include transform(rotate(5deg));
+    }
+    to {
+        @include transform(rotate(-130deg));
+    }
+}
+
+
+
+// ============ Margin and Padding ===============
+
+// Margin-top
+@for $i from 1 through 45 {
+    .mt-#{5 * $i} {
+        margin-top: 5px * $i;
+    }
+}
+
+// Margin-bottom
+@for $i from 1 through 45 {
+    .mb-#{5 * $i} {
+        margin-bottom: 5px * $i;
+    }
+}
+
+// Padding-top
+@for $i from 1 through 45 {
+    .pt-#{5 * $i} {
+        padding-top: 5px * $i;
+    }
+}
+
+// Padding-bottom
+@for $i from 1 through 45 {
+    .pb-#{5 * $i} {
+        padding-bottom: 5px * $i;
+    }
+}

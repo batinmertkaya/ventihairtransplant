@@ -1,0 +1,25 @@
+/*===========================
+    About css 
+===========================*/
+
+.about-section {
+    position: relative;
+    overflow: hidden;
+
+    .shape {
+        right: -50px;
+        top: 160px;
+    }
+
+    .about-content {
+        p {
+            padding: 0 15px;
+
+            @media #{$xs} {
+                padding: 0;
+            }
+        }
+    }
+}
+
+

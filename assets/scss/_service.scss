@@ -1,0 +1,85 @@
+// service-section css
+
+.service-section {
+    position: relative;
+
+    .shape {
+        top: 160px;
+        left: -50px;
+    }
+
+    .service-item {
+        border-radius: 20px;
+        @include box-shadow(0 10px 35px rgba($theme-color, .14));
+        @include transition(.3s);
+        position: relative;
+        padding: 40px;
+        z-index: 1;
+
+        .service-icon {
+            svg {
+                path {
+                    @include transition(.3s);
+                }
+            }
+        }
+        .service-content {
+            h4 {
+                margin-bottom: 20px;
+            }
+            p {
+                font-size: 16px;
+                line-height: 25px;
+                margin-bottom: 25px;
+            }
+
+        }
+
+        .service-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            border-radius: 20px;
+            background: url('../img/service/service-1.png');
+            opacity: 0;
+            visibility: hidden;
+            @include transform(scale(.9));
+            @include transition(.3s);
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-radius: 20px;
+                background: rgba($theme-color, .91);
+            }
+        }
+
+        &:hover {
+
+            .service-icon {
+                svg {
+                    path {
+                        fill: $white;
+                    }
+                }
+            }
+            .service-content {
+                h4, p, a {
+                    color: $white;
+                }
+            }
+            .service-overlay {
+                opacity: 1;
+                visibility: visible;
+                @include transform(scale(1));
+            }
+        }
+    }
+}

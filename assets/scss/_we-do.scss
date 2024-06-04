@@ -1,0 +1,25 @@
+// we-do section css
+
+
+.we-do-section {
+    position: relative;
+
+    .shape {
+        left: -100px;
+    }
+    
+    .we-do-item {
+        text-align: center;
+        
+        .we-do-icon {
+            width: 87px;
+            height: 87px;
+            line-height: 83px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 50%;
+            @include box-shadow(0 0 25px rgba($theme-color, .15));
+        }
+    }
+}

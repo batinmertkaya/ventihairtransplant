@@ -1,0 +1,123 @@
+/*===========================
+    Testimonial css 
+===========================*/
+.testimonial-section {
+    position: relative;
+
+    .shape {
+        right: 25px;
+        top: 50px;
+    }
+
+    .testimonial-active {
+
+        .slick-arrow {
+            position: absolute;
+            top: 50%;
+            @include transform(translateY(-50%));
+            color: $heading-color;
+            font-size: 40px;
+            left: -100px;
+            cursor: pointer;
+            @include transition(.3s);
+
+            @media #{$md} {
+                left: 0px;
+            }
+
+            &:hover {
+                color: $theme-color;
+            }
+
+            &.lni-arrow-right {
+                left: auto;
+                right: -100px;
+
+                @media #{$md} {
+                    right: 0px;
+                }
+            }
+        }
+
+        .single-testimonial {
+            position: relative;
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 60px;
+
+            .quote-icon {
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: -30px;
+            }
+
+            .testimonial-content {
+                p {
+                    font-size: 20px;
+                    font-weight: 600;
+                    font-style: italic;
+                    color: #393E46;
+                    margin-bottom: 30px;
+
+                    @media #{$md} {
+                        padding: 0 32px;
+                    }
+
+                    @media #{$xs} {
+                        padding: 0;
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .testimonial-info {
+                h5 {
+                    font-family: $font-2;
+                    color: $theme-color;
+                }
+
+                span {
+                    font-size: 16px;
+                    color: #8C96A7;
+                }
+            }
+        }
+    }
+
+    .thumbnails {
+
+        li {
+            margin: 0 5px;
+            @include transition(.3s);
+            @include transform(scale(.7));
+
+            &:focus {
+                outline: none;
+            }
+
+            &.tns-nav-active {
+                @include transform(scale(1));
+            }
+
+            img {
+                width: 90px;
+                height: 100px;
+                border-radius: 20px;
+
+                @media #{$xs} {
+                    display: none;
+                }
+                @media #{$sm} {
+                    display: block;
+                    width: 75px;
+                    height: 75px;
+                }
+            }
+        }
+    }
+
+}
+
+

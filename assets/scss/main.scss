@@ -1,0 +1,34 @@
+/* ==========================================
+----- Index css -----
+
+1. common css
+2. header css
+3. slider css
+4. we-do css
+5. about css
+6. service css
+7. testimonial css 
+8. faq css
+9. team css
+10. subscribe css
+11. blog css
+12. contact css
+13. footer css
+============================================ */
+
+@import 'variables';
+@import 'mixin';
+@import 'common';
+@import 'header';
+@import 'slider';
+@import 'we-do';
+@import 'about';
+@import 'service';
+@import 'testimonial';
+@import 'faq';
+@import 'team';
+@import 'subscribe';
+@import 'blog';
+@import 'contact';
+@import 'footer';
+

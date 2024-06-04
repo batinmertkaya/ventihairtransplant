@@ -1,0 +1,72 @@
+/*===========================
+    Team css 
+===========================*/
+.team-section {
+    position: relative;
+
+    .shape-5 {
+        right: 25px;
+        top: 122px;
+    }
+    .shape-6 {
+        bottom: 25px;
+        left: -40px;
+    }
+
+    .team-slider-wrapper {
+        position: relative;
+
+        .team-active {
+
+            .single-team {
+                padding: 15px 15px 30px;
+                border-radius: 20px;
+                border: 2px solid rgba(112, 112, 112, .18);
+                background: $white;
+                @include transition(.3s);
+
+                .team-img {
+                    border-radius: 20px 20px 0 0;
+                    position: relative;
+
+                    img {
+                        width: 100%;
+                    }
+
+                    .specialist {
+                        width: 45px;
+                        height: 45px;
+                        line-height: 37px;
+                        text-align: center;
+                        border-radius: 50%;
+                        background: $theme-color;
+                        border: 2px solid $white;
+                        margin: auto;
+                        position: absolute;
+                        bottom: -23px;
+                        left: 0;
+                        right: 0;
+                        z-index: 1;
+                    }
+                }
+
+                .team-info {
+                    h5 {
+                        margin-bottom: 8px;
+                    }
+
+                    span {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .single-team:hover{
+                border-color: $theme-color;
+                @include box-shadow(0 10px 35px rgba($theme-color, .14));
+            }
+        }
+    }
+}
+
+
