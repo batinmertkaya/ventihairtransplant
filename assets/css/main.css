@@ -1282,7 +1282,7 @@ p {
 ===========================*/
 .header {
   position: relative;
-  padding-top: 240px;
+  padding-top: px;
 }
 
 @media (max-width: 767px) {
