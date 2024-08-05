@@ -1,47 +1,61 @@
 import {
   ScrollArea,
-  TextInput,
-  rem,
   Table,
   Text,
   AspectRatio,
   Image,
+  Group,
+  Button,
 } from "@mantine/core";
-import { FC, useCallback, useState } from "react";
-import { IconSearch } from "@tabler/icons-react";
-import { db } from "../../firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { IconPlus } from "@tabler/icons-react";
+import { authStore } from "../../store";
+import { useStore } from "@nanostores/react";
 
 export const BlogTable: FC = () => {
-  const [search, setSearch] = useState<string>("");
-
+  const navigate = useNavigate();
+  const token = useStore(authStore).token;
   const { data } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
-      const col = collection(db, "blogs");
-      const docs = await getDocs(col);
+      const c = await fetch("https://admin.ventihairclinic.com/blogs", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      });
+      const docs = await c.json();
 
-      return docs.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as {
-          title: string;
-          content: string;
+      return docs.map(
+        (doc: {
+          id: number;
           slug: string;
-          image: string;
-        }),
-      }));
+          data: {
+            title: string;
+            content: string;
+            slug: string;
+            image: string;
+          };
+        }) => {
+          return {
+            id: doc.id,
+            title: doc.data.title,
+            content: doc.data.content,
+            slug: doc.data.slug,
+            image: doc.data.image,
+          };
+        }
+      ) as Array<{
+        id: number;
+        title: string;
+        content: string;
+        slug: string;
+        image: string;
+      }>;
     },
   });
-
-  const handleSearchChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.currentTarget;
-      setSearch(value);
-    },
-    []
-  );
 
   return (
     <ScrollArea>
@@ -57,6 +71,14 @@ export const BlogTable: FC = () => {
         value={search}
         onChange={handleSearchChange}
       /> */}
+      <Group justify="flex-end">
+        <Button
+          leftSection={<IconPlus />}
+          onClick={() => navigate("/blog/create")}
+        >
+          Create
+        </Button>
+      </Group>
       <Table
         horizontalSpacing="md"
         verticalSpacing="xs"
@@ -67,6 +89,7 @@ export const BlogTable: FC = () => {
           <Table.Tr>
             <Table.Th>Title</Table.Th>
             <Table.Th>Image</Table.Th>
+            <Table.Th>Delete</Table.Th>
           </Table.Tr>
         </Table.Tbody>
         <Table.Tbody>
@@ -83,6 +106,27 @@ export const BlogTable: FC = () => {
                     <Image src={blog.image} h="100" w="100" fit="contain" />
                   </AspectRatio>
                 )}
+              </Table.Td>
+              <Table.Td>
+                <Button
+                  color="red"
+                  variant="outline"
+                  onClick={async () => {
+                    await fetch(
+                      `https://admin.ventihairclinic.com/blogs/${blog.id}`,
+                      {
+                        headers: {
+                          Authorization: `Token ${token}`,
+                        },
+                        method: "DELETE",
+                      }
+                    );
+
+                    window.location.reload();
+                  }}
+                >
+                  Delete
+                </Button>
               </Table.Td>
             </Table.Tr>
           ))}

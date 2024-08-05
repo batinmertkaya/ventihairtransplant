@@ -17,6 +17,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { BlogTable } from "./dashboard/blog/BlogTable";
 import { BlogCreate } from "./dashboard/blog/BlogCreate";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Homepage } from "./dashboard/homepage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         <Route path="/" element={<BlogTable />} />
         <Route path="/blog/create" element={<BlogCreate />} />
         <Route path="/blog/:id" element={<BlogCreate />} />
+        <Route path="/homepage" element={<Homepage />} />
       </Route>
     </Route>
   )

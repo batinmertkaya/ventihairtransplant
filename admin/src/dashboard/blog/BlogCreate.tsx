@@ -16,7 +16,14 @@ import {
 } from "@mantine/core";
 import { FC, useCallback, useRef, useState } from "react";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
-import { IconCloudUpload, IconDownload, IconX } from "@tabler/icons-react";
+import {
+  IconCloudUpload,
+  IconDownload,
+  IconImageInPicture,
+  IconPhotoUp,
+  IconPictureInPictureOn,
+  IconX,
+} from "@tabler/icons-react";
 import { RichTextEditor, Link } from "@mantine/tiptap";
 import { useEditor } from "@tiptap/react";
 import Highlight from "@tiptap/extension-highlight";
@@ -25,12 +32,13 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
+import ImageExt from "@tiptap/extension-image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import slugify from "slugify";
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import { useDisclosure } from "@mantine/hooks";
 import { useNavigate, useParams } from "react-router-dom";
+import { useStore } from "@nanostores/react";
+import { authStore } from "../../store";
 
 type Form = {
   title: string;
@@ -46,6 +54,8 @@ export const BlogCreate: FC = () => {
   );
   const [visible, { open, close }] = useDisclosure(false);
 
+  const token = useStore(authStore).token;
+
   const theme = useMantineTheme();
   const openRef = useRef<() => void>(null);
   const fetchForm = useRef<boolean>(false);
@@ -54,11 +64,29 @@ export const BlogCreate: FC = () => {
   if (id && !fetchForm.current) {
     open();
     fetchForm.current = true;
-    const document = doc(db, "blogs", id);
 
-    getDoc(document).then((snap) => {
-      reset(snap.data());
-      setDefaultContent(snap.data()?.content);
+    fetch(`https://admin.ventihairclinic.com/blogs/${id}`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    }).then(async (res) => {
+      const snap = (await res.json()) as {
+        id: number;
+        slug: string;
+        data: {
+          title: string;
+          content: string;
+          image: string;
+        };
+      };
+
+      reset({
+        title: snap.data.title,
+        content: snap.data.content ?? undefined,
+        image: snap.data.image,
+        slug: snap.slug,
+      });
+      setDefaultContent(snap.data.content ?? undefined);
       close();
     });
   }
@@ -75,8 +103,11 @@ export const BlogCreate: FC = () => {
         SubScript,
         Highlight,
         TextAlign.configure({ types: ["heading", "paragraph"] }),
+        ImageExt.configure({
+          allowBase64: true,
+        }),
       ],
-      content: defaultContent,
+      content: defaultContent ?? undefined,
       onUpdate({ editor }) {
         setValue("content", editor.getHTML());
       },
@@ -86,21 +117,45 @@ export const BlogCreate: FC = () => {
 
   const onSubmit: SubmitHandler<Form> = useCallback(
     async (data) => {
-      console.log("data");
       open();
 
       if (!id) {
-        const document = collection(db, "blogs");
-
-        await addDoc(document, data);
+        await fetch("https://admin.ventihairclinic.com/blogs", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify({
+            slug: data.slug,
+            data: JSON.stringify({
+              title: data.title,
+              content: data.content,
+              image: data.image,
+            }),
+          }),
+        });
         close();
 
         navigate("/");
         return;
       }
 
-      const document = doc(db, "blogs", id);
-      await setDoc(document, data);
+      await fetch(`https://admin.ventihairclinic.com/blogs/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify({
+          slug: data.slug,
+          data: JSON.stringify({
+            title: data.title,
+            content: data.content,
+            image: data.image,
+          }),
+        }),
+      });
 
       close();
       navigate("/");
@@ -111,6 +166,8 @@ export const BlogCreate: FC = () => {
   );
 
   const image = watch("image");
+
+  const onEditorImageUpload = useCallback(() => {}, []);
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)} pos="relative">
@@ -188,7 +245,7 @@ export const BlogCreate: FC = () => {
 
                 <Text ta="center" fw={700} fz="lg" mt="xl">
                   <Dropzone.Accept>Drop images here</Dropzone.Accept>
-                  <Dropzone.Reject>Pdf file less than 10mb</Dropzone.Reject>
+                  <Dropzone.Reject>Image file less than 10mb</Dropzone.Reject>
                   <Dropzone.Idle>Upload image</Dropzone.Idle>
                 </Text>
                 <Text ta="center" fz="sm" mt="xs" c="dimmed">
@@ -256,6 +313,30 @@ export const BlogCreate: FC = () => {
               <RichTextEditor.ControlsGroup>
                 <RichTextEditor.Undo />
                 <RichTextEditor.Redo />
+              </RichTextEditor.ControlsGroup>
+
+              <RichTextEditor.ControlsGroup>
+                <Dropzone
+                  openRef={openRef}
+                  onDrop={(files) => {
+                    const file = files[0];
+
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      editor
+                        ?.chain()
+                        .focus()
+                        .setImage({ src: reader.result as string })
+                        .run();
+                    };
+                    reader.readAsDataURL(file);
+                  }}
+                  accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
+                >
+                  <div style={{ cursor: "pointer" }}>
+                    <IconPhotoUp />
+                  </div>
+                </Dropzone>
               </RichTextEditor.ControlsGroup>
             </RichTextEditor.Toolbar>
 

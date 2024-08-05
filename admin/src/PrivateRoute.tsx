@@ -1,16 +1,31 @@
 import { AppShell, Burger, Button, Flex, NavLink, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconArticle, IconLogout } from "@tabler/icons-react";
+import { useStore } from "@nanostores/react";
+import { IconArticle, IconHomeEdit, IconLogout } from "@tabler/icons-react";
 import { FC } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { auth } from "./firebase";
+import { authStore, logout } from "./store";
+
+const originalFetch = window.fetch;
+
+window.fetch = async (...args) => {
+  const res = await originalFetch(...args);
+
+  if (res.status === 401) {
+    logout();
+    return new Response("Unauthorized", { status: 401 });
+  }
+
+  return res;
+};
 
 export const PrivateRoute: FC = () => {
   const [opened, { toggle }] = useDisclosure();
   const navigate = useNavigate();
 
-  const user = auth.currentUser;
-  if (!user) {
+  const token = useStore(authStore).token;
+
+  if (!token) {
     return <Navigate to="/login" />;
   }
 
@@ -31,9 +46,18 @@ export const PrivateRoute: FC = () => {
         <Flex direction="column" justify="space-between" h="100%">
           <Stack>
             <NavLink
-              href="/"
+              onClick={() => {
+                navigate("/");
+              }}
               label="Blogs"
               leftSection={<IconArticle size="1rem" stroke={1.5} />}
+            />
+            <NavLink
+              onClick={() => {
+                navigate("/homepage");
+              }}
+              label="Homepage"
+              leftSection={<IconHomeEdit size="1rem" stroke={1.5} />}
             />
           </Stack>
           <Stack>
@@ -44,7 +68,7 @@ export const PrivateRoute: FC = () => {
               color="red"
               variant="transparent"
               onClick={async () => {
-                await auth.signOut();
+                logout();
                 navigate("/login");
               }}
             >

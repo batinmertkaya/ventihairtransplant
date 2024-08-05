@@ -8,18 +8,20 @@ import {
   Center,
 } from "@mantine/core";
 import { FC, useCallback } from "react";
-import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import { FirebaseError } from "firebase/app";
 import { notifications } from "@mantine/notifications";
+import { useStore } from "@nanostores/react";
+import { authStore } from "../store";
 
 export const Login: FC = () => {
+  const user = useStore(authStore).token;
+
   const form = useForm({
     initialValues: {
-      email: "",
-      password: "",
+      email: "admin@admin.com",
+      password: "98admin",
     },
 
     validate: {
@@ -38,7 +40,17 @@ export const Login: FC = () => {
     async ({ email, password }: typeof form.values) => {
       open();
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        await fetch("https://admin.ventihairclinic.com/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        })
+          .then(async (res) => res.json())
+          .then((data) => {
+            authStore.set({ token: data.token });
+          });
         navigate("/");
       } catch (err: FirebaseError | unknown) {
         if (err instanceof FirebaseError) {
@@ -56,6 +68,10 @@ export const Login: FC = () => {
     },
     []
   );
+
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Center h="100vh" bg="gray">
