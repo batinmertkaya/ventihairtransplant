@@ -1213,7 +1213,7 @@
     <script src="mert/js/main.js"></script>
 
     <script>
-      fetch("http://localhost:8787/blogs")
+      fetch("https://admin.ventihairclinic.com/blogs")
         .then((response) => response.json())
         .then((data) => {
           const blogsContainer = document.getElementById("blogs");
@@ -1234,7 +1234,7 @@
               "
             >
               <a
-                href="blog-details.html"
+                href="blog-details.html?id=${item.id}"
                 class="ud-w-full ud-block ud-relative"
               >
                 <span
@@ -1254,7 +1254,7 @@
               >
                 <h3>
                   <a
-                    href="/Blogs/blog-details.html"
+                    href="blog-details.html?id=${item.id}"
                     class="ud-font-bold ud-text-black dark:ud-text-white ud-text-xl sm:ud-text-2xl ud-block ud-mb-4 hover:ud-text-primary dark:hover:ud-text-primary"
                   >
                     ${item.data.title}
