@@ -1220,7 +1220,7 @@
           for (const item of data) {
             const div = document.createElement("div");
             div.className =
-              "ud-w-full md:ud-w-2/3 lg:ud-w-1/2 xl:ud-w-1/3 ud-px-4";
+              "ud-w-full md:ud-w-2/3 lg:ud-w-1/2 xl:ud-w-1/3 ud-px-4 h-full";
 
             div.innerHTML = `
                       
@@ -1231,21 +1231,19 @@
                 visibility: visible;
                 animation-delay: 0.1s;
                 animation-name: fadeInUp;
+                min-height: 400px;
               "
             >
               <a
                 href="blog-details.html?id=${item.id}"
                 class="ud-w-full ud-block ud-relative"
               >
-                <span
-                  class="ud-absolute ud-top-6 ud-right-6 ud-bg-primary ud-rounded-full ud-inline-flex ud-items-center ud-justify-center ud-py-2 ud-px-4 ud-font-semibold ud-text-sm ud-text-white"
-                >
-                  Computer
-                </span>
+                
                 <img
                   src="${item.data.image}"
                   alt="${item.data.title}"
                   class="ud-w-full"
+                  style="height: 200px; object-fit: cover"
                 />
                 
               </a>
@@ -1261,53 +1259,11 @@
                   </a>
                 </h3>
                 <p
-                  class="ud-text-base ud-text-body-color ud-font-medium ud-pb-6 ud-mb-6 ud-border-b ud-border-body-color ud-border-opacity-10 dark:ud-border-white dark:ud-border-opacity-10"
+                  class="ud-text-base ud-text-body-color ud-font-medium"
                 >
-                  ${
-                    item.data.content.length > 100
-                      ? `${item.data.content.slice(0, 100)}...`
-                      : item.data.content
-                  }
+                  ${item.data.message ?? ""}
                 </p>
-                <div class="ud-flex ud-items-center">
-                  <div
-                    class="ud-flex ud-items-center ud-pr-5 ud-mr-5 xl:ud-pr-3 2xl:ud-pr-5 xl:ud-mr-3 2xl:ud-mr-5 ud-border-r ud-border-body-color ud-border-opacity-10 dark:ud-border-white dark:ud-border-opacity-10"
-                  >
-                    <div
-                      class="ud-max-w-[40px] ud-w-full ud-h-[40px] ud-rounded-full ud-overflow-hidden ud-mr-4"
-                    >
-                      <img
-                        src="mert/images/blog/author-01.png"
-                        alt="author"
-                        class="ud-w-full"
-                      />
-                    </div>
-                    <div class="ud-w-full">
-                      <h4
-                        class="ud-text-sm ud-font-medium ud-text-dark dark:ud-text-white ud-mb-1"
-                      >
-                        By
-                        <a
-                          href="javascript:void(0)"
-                          class="ud-text-dark dark:ud-text-white hover:ud-text-primary dark:hover:ud-text-primary"
-                        >
-                          Samuyl Joshi
-                        </a>
-                      </h4>
-                      <p class="ud-text-xs ud-text-body-color">
-                        Graphic Designer
-                      </p>
-                    </div>
-                  </div>
-                  <div class="ud-inline-block">
-                    <h4
-                      class="ud-text-sm ud-font-medium ud-text-dark dark:ud-text-white ud-mb-1"
-                    >
-                      Date
-                    </h4>
-                    <p class="ud-text-xs ud-text-body-color">15 Dec, 2023</p>
-                  </div>
-                </div>
+
               </div>
             </div>
           `;
