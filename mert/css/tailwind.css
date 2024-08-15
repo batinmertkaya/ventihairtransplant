@@ -1995,6 +1995,7 @@ input#checkboxLabel:checked ~ .box span{
 .ud-dark .dark\:ud-text-white{
   --tw-text-opacity: 1;
   color: #fff;
+  max-height: 30px;
 }
 
 .ud-dark .dark\:ud-text-body-color{
@@ -2491,6 +2492,7 @@ input#checkboxLabel:checked ~ .box span{
 
   .xl\:ud-w-1\/3{
     width: 33.333333%;
+    
   }
 
   .xl\:ud-max-w-\[150px\]{
@@ -2594,6 +2596,8 @@ input#checkboxLabel:checked ~ .box span{
 
   .\32xl\:ud-p-8{
     padding: 2rem;
+    
+    
   }
 
   .\32xl\:ud-py-\[60px\]{

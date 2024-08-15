@@ -231,7 +231,7 @@ p {
   -ms-user-select: none;
   user-select: none;
   padding: 18px 40px;
-  margin-top: 24px;
+  /* margin-top: 24px; */
   font-size: 18px;
   border-radius: 10px;
   border: none;
