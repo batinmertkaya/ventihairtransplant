@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="ud-dark">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Venti Hair Clinic</title>
-    <link
-      rel="shortcut icon"
-      href="mert/images/favicon.png"
-      type="image/x-icon"
+    <meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Venti Hair Clinic</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="/images_veni/window_icon.svg">
     />
     <link rel="stylesheet" href="mert/css/animate.css" />
     <link rel="stylesheet" href="mert/css/glightbox.min.css" />
@@ -106,7 +104,15 @@
                       <a class="page-scroll" href="/index.html">About</a>
                     </li>
                     <li class="nav-item">
-                      <a class="page-scroll" href="#services">Service</a>
+                      <a class="page-scroll " href="#services">Methods</a>
+                      <div class="sub-menu" style="padding: 12px;">
+                        <a href="#">FUE Hair Transplant</a><br><br>
+                        <a href="#">Sapphire FUE Hair Transplant</a><br><br>
+                        <a href="#">DHI Hair Transplant</a><br><br>
+                        <a href="#">No Shave Hair Trasnplant</a><br><br>
+                        <a href="#">Body Hair Transplant</a><br><br>
+                        <a href="#">Micro Shave DHI Hair Transplant</a><br><br>
+                      </div>
                     </li>
                     <!-- <li class="nav-item">
                           <a class="page-scroll" href="#team">Doctor</a>
@@ -1220,7 +1226,7 @@
           for (const item of data) {
             const div = document.createElement("div");
             div.className =
-              "ud-w-full md:ud-w-2/3 lg:ud-w-1/2 xl:ud-w-1/3 ud-px-4 h-full";
+              "ud-w-full md:ud-w-2/3 lg:ud-w-1/2 xl:ud-w-1/3 ud-px-4";
 
             div.innerHTML = `
                       
@@ -1231,19 +1237,17 @@
                 visibility: visible;
                 animation-delay: 0.1s;
                 animation-name: fadeInUp;
-                min-height: 400px;
               "
             >
               <a
                 href="blog-details.html?id=${item.id}"
                 class="ud-w-full ud-block ud-relative"
               >
-                
+               
                 <img
                   src="${item.data.image}"
                   alt="${item.data.title}"
                   class="ud-w-full"
-                  style="height: 200px; object-fit: cover"
                 />
                 
               </a>
@@ -1259,12 +1263,15 @@
                   </a>
                 </h3>
                 <p
-                  class="ud-text-base ud-text-body-color ud-font-medium"
+                  class="ud-text-base ud-text-body-color ud-font-medium ud-pb-6 ud-mb-6 ud-border-b ud-border-body-color ud-border-opacity-10 dark:ud-border-white dark:ud-border-opacity-10"
                 >
-                  ${item.data.message ?? ""}
+                  ${
+                    item.data.content.length > 100
+                      ? `${item.data.content.slice(0, 100)}...`
+                      : item.data.content
+                  }
                 </p>
-
-              </div>
+                
             </div>
           `;
 
