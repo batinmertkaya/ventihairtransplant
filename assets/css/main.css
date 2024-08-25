@@ -37,7 +37,7 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.banner {
+.blog-detail-banner {
   border-radius: 12px;
   background-color: #2d2d2d;
   position: relative;
@@ -46,11 +46,7 @@ body {
   overflow: hidden;
 }
 
-.banner-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Resmin tam olarak sığması ve kırpılması için */
-}
+
 
 .banner-text {
   position: absolute;
@@ -63,22 +59,22 @@ body {
   border-radius: 10px; /* Köşelerin yuvarlatılması */
 }
 
-.banner-text h1 {
-  
+.blog-detail-banner-text h1 {
+  padding-left: 24px;
   color: #FBDB86;
   margin: 0;
   font-size: 36px; /* Başlık font boyutu */
 }
 
-.banner-text p {
+.blog-detail-banner-text p {
   min-width: 30rem;
   color: #fff;
-  padding: 12px;
+  padding: 24px;
   margin: 10px 0 0;
   font-size: 18px; /* Açıklama metni font boyutu */
 }
 
-img {
+.blog-detail-banner img {
   padding: 24px;
   display: flex;
   justify-content: center;
