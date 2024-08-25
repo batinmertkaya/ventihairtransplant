@@ -2036,15 +2036,22 @@ p {
   position: absolute;
   left: 0;
   top: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 100%;
+  display: flex; /* Modern tarayıcılar için sadece flex kullanımı */
+  align-items: center;
+  justify-content: center; /* Merkezde hizalama */
   overflow: hidden;
   width: 50%;
+  height: 100%; /* Tam yükseklik */
+
+  /* İçerik zoom yapmasını önlemek için yeni eklemeler */
+}
+
+.faq-section .faq-video-wrapper img, /* Eğer img kullanılacaksa */
+.faq-section .faq-video-wrapper video { /* Eğer video kullanılacaksa */
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* İçeriği kesmeden sığdır */
+  object-position: center; /* İçeriği merkeze hizala */
 }
 
 @media only screen and (min-width: 1400px) {
