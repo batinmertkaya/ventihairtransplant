@@ -27,7 +27,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-style: normal;
-  color: #8C96A7;
+  
   overflow-x: hidden;
 }
 
@@ -37,9 +37,52 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+.banner {
+  border-radius: 12px;
+  background-color: #2d2d2d;
+  position: relative;
+  width: 100%;
+  height: 300px; /* Banner yüksekliği */
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Resmin tam olarak sığması ve kırpılması için */
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FBDB86; /* Yazı rengi */
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px; /* Köşelerin yuvarlatılması */
+}
+
+.banner-text h1 {
+  
+  color: #FBDB86;
+  margin: 0;
+  font-size: 36px; /* Başlık font boyutu */
+}
+
+.banner-text p {
+  min-width: 30rem;
+  color: #fff;
+  padding: 12px;
+  margin: 10px 0 0;
+  font-size: 18px; /* Açıklama metni font boyutu */
+}
 
 img {
-  max-width: 100%;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  max-width: 16%;
 }
 
 .navbar-toggler:focus,

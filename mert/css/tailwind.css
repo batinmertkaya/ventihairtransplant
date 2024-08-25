@@ -1012,6 +1012,7 @@ video {
 }
 
 .ud-w-full{
+  
   width: 100%;
 }
 
@@ -1348,6 +1349,7 @@ video {
 }
 
 .ud-p-8{
+  
   padding: 2rem;
 }
 
@@ -2315,6 +2317,7 @@ input#checkboxLabel:checked ~ .box span{
 
   .lg\:ud-w-1\/3{
     width: 33.333333%;
+    
   }
 
   .lg\:ud-max-w-full{
@@ -2491,6 +2494,7 @@ input#checkboxLabel:checked ~ .box span{
   }
 
   .xl\:ud-w-1\/3{
+
     width: 33.333333%;
     
   }
