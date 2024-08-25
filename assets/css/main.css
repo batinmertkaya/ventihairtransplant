@@ -38,7 +38,7 @@ body {
   box-sizing: border-box;
 }
 .blog-detail-banner {
-  margin-bottom: 2rem;
+  margin-bottom: 24px;
   border-radius: 12px;
   background-color: #2d2d2d;
   position: relative;
