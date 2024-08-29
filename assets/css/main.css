@@ -50,6 +50,7 @@ body {
 
 
 
+
 .banner-text {
   position: absolute;
   top: 50%;
@@ -69,7 +70,7 @@ body {
 }
 
 .blog-detail-banner-text p {
-  min-width: 30rem;
+  width: 100%;
   color: #fff;
   padding: 24px;
   margin: 10px 0 0;
